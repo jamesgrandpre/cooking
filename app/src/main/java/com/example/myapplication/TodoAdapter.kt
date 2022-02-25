@@ -7,58 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.item_todo.view.*
 
-
-
-public class Converter {
-
-    enum class Type {
-        Pound,
-        Kilogram,
-        Ounce,
-        Cups,
-        Grams
-    };
-
-    private fun isWeight(type: Type) : Boolean
-    {
-        when(type)
-        {
-            Type.Pound, Type.Kilogram, Type.Ounce, Type.Grams -> {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    fun convert(before: Int, fromType: Type, toType: Type) : Int {
-        if(isWeight(fromType) and isWeight(toType))
-        {
-
-        }
-
-        var result = 0;
-        when(fromType) {
-            Type.Cups -> {
-                when(toType) {
-                    Type.Cups -> {
-                        result = before;
-                    }
-                    Type.Grams -> {
-                        result = before * 120;
-                    }
-                }
-            }
-            Type.Grams -> {
-
-            }
-        }
-
-        return result;
-    }
-}
 
 class TodoAdapter (
     private val todos: MutableList<Todo>
@@ -88,18 +40,14 @@ class TodoAdapter (
         val curToDo = todos[position]
         holder.itemView.apply{
 
+            val value = curToDo.value
+            val to = curToDo.to
+            val from = curToDo.from
+            val myConverter = UnitConverter();
+            val converted = myConverter.convert(value, from, to)
+            val resultingText = "$value $from converted to $to: $converted"
 
-
-            var temp = curToDo.title.toString().toInt()
-            val myConverter = Converter();
-            var result = myConverter.convert(temp, Converter.Type.Cups, Converter.Type.Grams)
-            println(result);
-
-
-
-
-
-            tvTodoTitle.text = result.toString()
+            tvTodoTitle.text = resultingText.toString()
             cdDone.isChecked = curToDo.isChecked
             toggleStrikeThrough(tvTodoTitle, curToDo.isChecked)
             cdDone.setOnCheckedChangeListener { _, isChecked ->
@@ -110,9 +58,6 @@ class TodoAdapter (
     }
 
     fun addTodo(todo: Todo){
-
-
-
         todos.add(todo)
         notifyItemInserted(todos.size - 1)
     }

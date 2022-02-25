@@ -6,7 +6,7 @@ public class UnitConverter() {
         addUnit("Base", Category.Volume, 1.0)
         addUnit("Teaspoon", Category.Volume, 1.0)
         addUnit("Tablespoon", Category.Volume, 3.0)
-        addUnit("Cup", Category.Volume, 48.6922)
+        addUnit("Cup", Category.Volume, 48.0)
         addUnit("Ounce", Category.Volume, 6.0)
         addUnit("Apple", Category.PseudoVolume, 36.0)
     }
@@ -14,7 +14,7 @@ public class UnitConverter() {
     fun convert(value: Double, from: String, to: String): Double {
         val unitFrom = units.getValue(from)
         val unitTo = units.getValue(to)
-        if (unitTo != null && unitFrom != null) {
+        if (unitTo == null || unitFrom == null) {
             println("Invalid Unit used. $from:$to")
             return 0.0
         }

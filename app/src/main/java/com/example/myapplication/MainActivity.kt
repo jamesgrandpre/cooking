@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,11 +19,14 @@ class MainActivity : AppCompatActivity() {
         rvTodoItems.layoutManager = LinearLayoutManager(this)
 
         btnAddTodo.setOnClickListener {
-            val todoTitle = etTodoTitle.text.toString()
+            val todoTitle = etValue.text.toString()
             if(todoTitle.isNotEmpty()){
-                val todo = Todo(todoTitle)
+                val value = todoTitle.toDouble()
+                val to = etTo.text.toString()
+                val from = etFrom.text.toString()
+
+                val todo = Todo(todoTitle, false, value, to, from)
                 todoAdapter.addTodo(todo)
-                etTodoTitle.text.clear()
             }
         }
 
