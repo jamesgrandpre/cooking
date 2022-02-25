@@ -21,7 +21,7 @@ public class UnitConverter() {
 
         val baseValue = value * unitFrom.conversionFromBase
         val conversionToBase = 1.0 / unitTo.conversionFromBase
-        return unitTo.conversionFromBase * baseValue
+        return conversionToBase * baseValue
     }
 
     private fun addUnit(name: String, category: Category, conversionFromBase: Double)

@@ -45,7 +45,8 @@ class TodoAdapter (
             val from = curToDo.from
             val myConverter = UnitConverter();
             val converted = myConverter.convert(value, from, to)
-            val resultingText = "$value $from converted to $to: $converted"
+            val convertedFormatted = String.format("%.3f", converted)
+            val resultingText = "$value $from converted to $to: $convertedFormatted"
 
             tvTodoTitle.text = resultingText.toString()
             cdDone.isChecked = curToDo.isChecked
