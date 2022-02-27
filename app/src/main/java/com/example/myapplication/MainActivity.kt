@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
             val todoTitle = etValue.text.toString()
             if(todoTitle.isNotEmpty()){
                 val value = todoTitle.toDouble()
-                val to = etTo.text.toString()
-                val from = etFrom.text.toString()
+                val to = toSpinner.selectedItem.toString()
+                val from = fromSpinner.selectedItem.toString()
                 val todo = Todo(todoTitle, false, value, to, from)
                 todoAdapter.addTodo(todo)
             }
@@ -44,6 +44,9 @@ class MainActivity : AppCompatActivity() {
        }
 
         val units = MyApplication.globalUnitConverter.getTypes()
+        fromSpinner.adapter = ArrayAdapter(this,
+            android.R.layout.simple_spinner_item,
+            units)
         toSpinner.adapter = ArrayAdapter(this,
             android.R.layout.simple_spinner_item,
             units)
