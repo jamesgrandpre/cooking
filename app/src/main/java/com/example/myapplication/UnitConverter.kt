@@ -34,9 +34,17 @@ public class UnitConverter(private val assets: AssetManager) {
         return conversionToBase * baseValue
     }
 
-    fun getTypes(): List<String>
+    fun getTypes(capitalizeWords: Boolean = true): List<String>
     {
-        return types.toList()
+        val result = types.toMutableList()
+        result.removeFirst()
+        if(capitalizeWords)
+        {
+            for((index, unit) in result.withIndex()){
+                result[index] = unit.capitalize()
+            }
+        }
+        return result
     }
 
     private fun addUnit(name: String, category: String, conversionFromBase: Double)
