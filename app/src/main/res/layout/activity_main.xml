@@ -20,8 +20,11 @@
         android:id="@+id/etValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="204dp"
         android:hint="Enter Value..."
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAddTodo"
         app:layout_constraintHorizontal_bias="0.0"
@@ -31,9 +34,10 @@
         android:id="@+id/etTo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:hint="Enter Todo Title"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="71dp"
+        android:hint="Enter To Type"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toSpinner"
         app:layout_constraintEnd_toStartOf="@+id/btnAddTodo"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
@@ -42,8 +46,10 @@
         android:id="@+id/etFrom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:hint="Enter Todo Title"
+        android:layout_marginBottom="156dp"
+        android:hint="Enter From Type"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAddTodo"
         app:layout_constraintHorizontal_bias="0.0"
@@ -70,5 +76,13 @@
         android:hint="Delete Done"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Spinner
+        android:id="@+id/toSpinner"
+        android:layout_width="269dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="670dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
