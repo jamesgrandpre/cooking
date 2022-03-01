@@ -3,11 +3,10 @@ import android.content.res.AssetManager
 import java.io.InputStream
 
 // This class can be used to convert units. Also, use this to retrieve all available unit types.
-public class UnitConverter(private val assets: AssetManager) {
+object UnitConverter {
     private val units = mutableMapOf<String, Unit>()
-    val types = mutableSetOf<String>()
-    val categories = mutableSetOf<String>()
-    init {
+
+    fun loadAssets(assets: AssetManager) {
         // Retrieve the list of units from the /app/assets/units.txt file
         val inputStream: InputStream = assets.open("units.txt")
         inputStream.bufferedReader().useLines { lines ->
@@ -16,7 +15,7 @@ public class UnitConverter(private val assets: AssetManager) {
                 val name = values[0]
                 val category = values[1]
                 val conversionFromBase = values[2].toDouble()
-                addUnit(name, category, conversionFromBase)
+                units[name] = Unit(name, category, conversionFromBase)
             }
         }
     }
@@ -36,22 +35,15 @@ public class UnitConverter(private val assets: AssetManager) {
 
     fun getTypes(capitalizeWords: Boolean = true): List<String>
     {
-        val result = types.toMutableList()
-        result.removeFirst()
+        val tempList = units.keys.toMutableList()
+        tempList.removeFirst()
         if(capitalizeWords)
         {
-            for((index, unit) in result.withIndex()){
-                result[index] = unit.capitalize()
+            for((index, unit) in tempList.withIndex()){
+                tempList[index] = unit.capitalize()
             }
         }
-        return result
-    }
-
-    private fun addUnit(name: String, category: String, conversionFromBase: Double)
-    {
-        categories.add(category)
-        types.add(name)
-        units[name] = Unit(name, category, conversionFromBase)
+        return tempList
     }
 
     public class Unit(

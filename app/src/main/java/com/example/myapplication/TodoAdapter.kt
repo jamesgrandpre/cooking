@@ -1,25 +1,15 @@
 package com.example.myapplication
-
-import android.content.res.AssetManager
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.R.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.item_todo.view.*
-import java.io.InputStream
-import kotlin.coroutines.coroutineContext
-import com.example.myapplication.MyApplication.Companion.globalUnitConverter
 
 class TodoAdapter(
     private val todos: MutableList<Todo>
 ) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
-
-
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
@@ -46,7 +36,7 @@ class TodoAdapter(
             val value = curToDo.value
             val to = curToDo.to
             val from = curToDo.from
-            val converted = globalUnitConverter.convert(value, from, to)
+            val converted = UnitConverter.convert(value, from, to)
             val convertedFormatted = String.format("%.3f", converted)
             val resultingText = "$value $from converted to $to: $convertedFormatted"
 
@@ -72,9 +62,7 @@ class TodoAdapter(
         notifyDataSetChanged()
     }
 
-
     override fun getItemCount(): Int {
         return todos.size
     }
-
 }
