@@ -10,36 +10,96 @@
         android:id="@+id/rvTodoItems"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/etTodoTitle"
+        app:layout_constraintBottom_toTopOf="@+id/etValue"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etTodoTitle"
+        android:id="@+id/etValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Todo Title"
+        android:layout_marginBottom="260dp"
+        android:hint="Enter Value..."
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddTodo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnAddTodo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="152dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#FF5722"
         android:hint="Add ToDo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnDeleteTodo" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
+        app:layout_constraintVertical_bias="0.146" />
 
     <Button
         android:id="@+id/btnDeleteTodo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="59dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="40dp"
         android:hint="Delete Done"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.687"
+        app:layout_constraintStart_toEndOf="@+id/btnAddTodo" />
+
+    <Spinner
+        android:id="@+id/fromSpinner"
+        android:layout_width="151dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="29dp"
+        app:layout_constraintBottom_toTopOf="@+id/toSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/etValue"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/toSpinner"
+        android:layout_width="158dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddTodo"
+        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="From:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etValue" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="To:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

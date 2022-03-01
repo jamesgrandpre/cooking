@@ -1,0 +1,7 @@
+base,Volume,1.0
+teaspoon,Volume,1.0
+tablespoon,Volume,3.0
+cup,Volume,48.0
+ounce,Volume,6.0
+litre,Volume,202.884
+apple,PseudoVolume,36.0

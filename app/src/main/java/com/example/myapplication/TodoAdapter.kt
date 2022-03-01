@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.res.AssetManager
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.view.LayoutInflater
 import android.view.View
@@ -7,62 +8,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.item_todo.view.*
+import java.io.InputStream
+import kotlin.coroutines.coroutineContext
+import com.example.myapplication.MyApplication.Companion.globalUnitConverter
 
-
-
-public class Converter {
-
-    enum class Type {
-        Pound,
-        Kilogram,
-        Ounce,
-        Cups,
-        Grams
-    };
-
-    private fun isWeight(type: Type) : Boolean
-    {
-        when(type)
-        {
-            Type.Pound, Type.Kilogram, Type.Ounce, Type.Grams -> {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    fun convert(before: Int, fromType: Type, toType: Type) : Int {
-        if(isWeight(fromType) and isWeight(toType))
-        {
-
-        }
-
-        var result = 0;
-        when(fromType) {
-            Type.Cups -> {
-                when(toType) {
-                    Type.Cups -> {
-                        result = before;
-                    }
-                    Type.Grams -> {
-                        result = before * 120;
-                    }
-                }
-            }
-            Type.Grams -> {
-
-            }
-        }
-
-        return result;
-    }
-}
-
-class TodoAdapter (
+class TodoAdapter(
     private val todos: MutableList<Todo>
-    ) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -87,19 +43,14 @@ class TodoAdapter (
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val curToDo = todos[position]
         holder.itemView.apply{
+            val value = curToDo.value
+            val to = curToDo.to
+            val from = curToDo.from
+            val converted = globalUnitConverter.convert(value, from, to)
+            val convertedFormatted = String.format("%.3f", converted)
+            val resultingText = "$value $from converted to $to: $convertedFormatted"
 
-
-
-            var temp = curToDo.title.toString().toInt()
-            val myConverter = Converter();
-            var result = myConverter.convert(temp, Converter.Type.Cups, Converter.Type.Grams)
-            println(result);
-
-
-
-
-
-            tvTodoTitle.text = result.toString()
+            tvTodoTitle.text = resultingText.toString()
             cdDone.isChecked = curToDo.isChecked
             toggleStrikeThrough(tvTodoTitle, curToDo.isChecked)
             cdDone.setOnCheckedChangeListener { _, isChecked ->
@@ -110,9 +61,6 @@ class TodoAdapter (
     }
 
     fun addTodo(todo: Todo){
-
-
-
         todos.add(todo)
         notifyItemInserted(todos.size - 1)
     }
@@ -128,6 +76,5 @@ class TodoAdapter (
     override fun getItemCount(): Int {
         return todos.size
     }
-
 
 }
